@@ -26,6 +26,11 @@ spec:
 * Even worse, without TLS:
 
 ```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-app-ingress
+  namespace: siren  # The namespace where the Ingress will reside
 spec:
   rules:
   - host: "192.168.1.100"  # Replace with the public IP address of the Ingress Controller
@@ -35,7 +40,8 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: my-app-service
+            name: my-app-service  # Service must exist in the 'siren' namespace
             port:
               number: 80
+
 ```
